@@ -21,11 +21,11 @@ export default {
       swiperList: [
         {
           id: "0001",
-          imgUrl: '../../../assets/styles/images/focus.jpg',
+          imgUrl: require('../../../assets/styles/images/focus.jpg'),
         },
         {
           id: "0002",
-          imgUrl: '../../../assets/styles/images/focus1.jpg',
+          imgUrl: require('../../../assets/styles/images/focus1.jpg'),
         },
       ],
     };
