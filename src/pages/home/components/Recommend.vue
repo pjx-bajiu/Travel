@@ -48,7 +48,7 @@ export default {
 };
 </script>
 
-<style lang='stylus' scope>
+<style lang='stylus' scoped>
 @import '~styles/minxins.styl'
 .title {
   margin-top: 0.2rem;

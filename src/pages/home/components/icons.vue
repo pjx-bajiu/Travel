@@ -93,7 +93,7 @@ export default {
 };
 </script>
 
-<style lang='stylus' scope>
+<style lang='stylus' scoped>
 @import '~styles/varibles.styl';
 @import '~styles/minxins.styl';
 
