@@ -2,7 +2,7 @@
   <div>
     <div class="title">热销推荐</div>
     <ul class="item-margin">
-      <li class="item border-botttom" v-for='item of recommendList' :key='item.id'>
+      <li class="item border-botttom" v-for='item of list' :key='item.id'>
         <img class="item-img" :src="item.imgUrl" />
         <div class="item-info">
           <p class="item-title">{{item.title}}</p>
@@ -17,33 +17,8 @@
 <script>
 export default {
   name: "HomeRcommend",
-  data () {
-      return {
-          recommendList: [{
-          id:'0001',
-          imgUrl: require('../../../assets/styles/images/cat.jpg'),
-          title:'猫咖',
-          desc:'60元畅游2小时,60元畅游2小时,60元畅游2小时.60元畅游2小时'
-      },
-      {
-          id:'0002',
-          imgUrl: require('../../../assets/styles/images/cat.jpg'),
-          title:'猫咖',
-          desc:'60元畅游2小时,60元畅游2小时,60元畅游2小时.60元畅游2小时'
-      },
-      {
-          id:'0003',
-          imgUrl: require('../../../assets/styles/images/cat.jpg'),
-          title:'猫咖',
-          desc:'60元畅游2小时,60元畅游2小时,60元畅游2小时.60元畅游2小时'
-      },
-      {
-          id:'0004',
-          imgUrl: require('../../../assets/styles/images/cat.jpg'),
-          title:'猫咖',
-          desc:'60元畅游2小时,60元畅游2小时,60元畅游2小时.60元畅游2小时'
-      }]
-      }
+  props: {
+    list:Array
   }
 };
 </script>
@@ -55,10 +30,6 @@ export default {
   line-height: 0.8rem;
   background: #eee;
   text-indent: 0.2rem;
-}
-.item-margin {
-    margin-top: .1rem;
-    margin-left: .08rem;
 }
 .item {
     display: flex;
