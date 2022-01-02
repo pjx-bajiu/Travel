@@ -1,10 +1,10 @@
 <template>
   <div>
     <home-header></home-header>
-    <home-swiper :list='swiperList'></home-swiper>
-    <home-icons :list='iconsList'></home-icons>
-    <home-recommend :list='recommendList'></home-recommend>
-    <home-weekend :list='weekendList'></home-weekend>
+    <home-swiper :list="swiperList"></home-swiper>
+    <home-icons :list="iconsList"></home-icons>
+    <home-recommend :list="recommendList"></home-recommend>
+    <home-weekend :list="weekendList"></home-weekend>
     <div>test</div>
   </div>
 </template>
@@ -16,6 +16,7 @@ import HomeIcons from "./components/icons.vue";
 import HomeRecommend from "./components/Recommend.vue";
 import HomeWeekend from "./components/Weekend.vue";
 import axios from "axios";
+import { mapState } from "vuex";
 export default {
   name: "Home",
   components: {
@@ -23,36 +24,47 @@ export default {
     HomeSwiper,
     HomeIcons,
     HomeRecommend,
-    HomeWeekend
+    HomeWeekend,
   },
-  data () {
+  data() {
     return {
+      lastCity: " ",
       swiperList: [],
-      iconsList:[],
-      recommendList:[],
-      weekendList:[]
-    }
+      iconsList: [],
+      recommendList: [],
+      weekendList: [],
+    };
+  },
+  computed: {
+    ...mapState(["city"]),
   },
   methods: {
     getHomeInfo() {
-      axios.get('/api/index.json')
-      .then(this.getHomeInfoSucc)
+      axios.get("/api/index.json?city=" + this.city).then(this.getHomeInfoSucc);
     },
     getHomeInfoSucc(res) {
-      res = res.data
+      res = res.data;
       if (res.ret && res.data) {
-        const data = res.data
-        this.swiperList = data.swiperList
-        this.iconsList = data.iconList
-        this.recommendList = data.recommendList
-        this.weekendList = data.weekendList
+        const data = res.data;
+        this.swiperList = data.swiperList;
+        this.iconsList = data.iconList;
+        this.recommendList = data.recommendList;
+        this.weekendList = data.weekendList;
       }
-    }
+    },
   },
-  mounted () {
+  mounted() {
+    this.lastCity = this.city
+    console.log('mounted')
     this.getHomeInfo()
   },
-}
+  activated () {
+    if (this.lastCity !== this.city) {
+      this.lastCity = CountQueuingStrategy
+    this.getHomeInfo()
+    }
+  }
+};
 </script>
 
 <style>
