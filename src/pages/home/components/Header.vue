@@ -59,7 +59,6 @@ export default {
 
   .header-right {
     min-width: 1.04rem;
-    padding: 0.1rem;
     float: right;
     line-height: $headerHeight;
     text-align: center;
