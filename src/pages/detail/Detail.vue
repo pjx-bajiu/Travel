@@ -1,6 +1,11 @@
 <template>
   <div>
-    <detail-banner></detail-banner>
+    <detail-banner
+      :sightName="sightName"
+      :bannerImg="bannerImg"
+      :bannerImgs="gallaryImgs"
+      @error="onError"
+    ></detail-banner>
     <detail-header></detail-header>
     <div class="content">
       <detail-list :list="list"></detail-list>
@@ -12,6 +17,7 @@
 import DetailBanner from "./components/Banner.vue";
 import DetailHeader from "./components/Header.vue";
 import DetailList from "./components/List.vue";
+import axios from "axios";
 export default {
   name: "Detail",
   components: {
@@ -21,34 +27,41 @@ export default {
   },
   data() {
     return {
-      list: [
-        {
-          title: "成人票",
-          children: [
-            {
-              title: "【春节优惠】大连圣亚海洋世界五馆单人票",
-              children: [
-                {
-                  title: "含海洋世界+珊瑚世界+极低世界+深海世界+游玩世界",
-                },
-              ],
-            },
-            {
-              title: "成人五馆联票",
-            },
-          ],
-        },
-        {
-          title: "学生票",
-        },
-        {
-          title: "儿童票",
-        },
-        {
-          title: "特惠票",
-        },
-      ],
+      sightName: "",
+      bannerImg: "",
+      gallaryImgs: [],
+      list: []
     };
+  },
+  methods: {
+    getDetailInfo() {
+      axios
+        .get("/api/detail.json?id=", {
+          params: {
+            id: this.$route.params.id,
+          },
+        })
+        .then(this.handleGetDataSucc);
+    },
+    onError() {
+      if (this.bannerImg) {
+         this.bannerImg = require("../../assets/styles/images/cat.jpg");
+      }
+    },
+    handleGetDataSucc(res) {
+      res = res.data;
+      if (res.ret && res.data) {
+        const data = res.data;
+        this.sightName = data.sightName;
+        this.bannerImg = data.bannerImg
+
+        this.gallaryImgs = data.gallaryImgs;
+        this.list = data.categoryList;
+      }
+    },
+  },
+  mounted() {
+    this.getDetailInfo();
   },
 };
 </script>

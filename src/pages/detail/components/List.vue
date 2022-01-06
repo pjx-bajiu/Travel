@@ -1,9 +1,9 @@
 <template>
-  <div class="item-father">
+  <div>
     <div class="item" v-for="(item, index) of list" :key="index">
       <div class="item-title border-bottom">
-          <span class="item-title-icon"></span>
-          {{item.title}}
+          <span v-if="item.id" class="item-title-icon"></span>
+          <span :class="{'other-level': !item.id}">{{item.title}}</span>
       </div>
       <div v-if="item.children" class="item-children">
           <detail-list :list="item.children"></detail-list>
@@ -34,8 +34,11 @@ export default {
         width: .36rem;
         height: .36rem;
         margin-right: .1rem;
-        background: url(http://s.qunarzz.com/piao/image/touch/sight/detail.png) 0 -.45rem no-repeat;
+        background: url('../../../assets/styles/images/icon.png') 0 -.45rem no-repeat;
         background-size: .4rem 3rem;
+    }
+    .other-level {
+        font-size: 0.24rem;
     }
 }
 .item-children {
