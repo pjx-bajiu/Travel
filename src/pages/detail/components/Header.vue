@@ -42,7 +42,6 @@ export default {
           } else {
               this.showAbs = true
           }
-          console.log(document.documentElement.scrollTop)
       }
   },
   activated () {
@@ -74,6 +73,7 @@ export default {
 }
 
 .header-fixed {
+  z-index: 2;
   position: fixed;
   top:0;
   right:0;
