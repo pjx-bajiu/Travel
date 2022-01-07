@@ -91,7 +91,6 @@ export default {
 }
 
 .list {
-  overflow: hidden;
   position: absolute;
   top: 1.58rem;
   left: 0;

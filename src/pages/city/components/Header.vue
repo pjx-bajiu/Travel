@@ -17,6 +17,7 @@ export default {
 @import '~styles/varibles.styl';
 
 .header {
+  z-index: 99;
   position: relative;
   overflow: hidden;
   height: $headerHeight;
